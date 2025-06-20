@@ -1,0 +1,21 @@
+﻿@using Demo.Models
+@model List<Department>
+<table class="table table-bordered table-hover">
+	<thead>
+		<tr>
+			<th>Department ID</th>
+			<th>Department Name</th>
+			<th>Manager ID</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var department in Model)
+		{
+			<tr>
+				<td>@department.Id</td>
+				<td>@department.Name</td>
+				<td>@department.ManagerName</td>
+			</tr>
+		}
+	</tbody>
+</table>
