@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using FirstMVC.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Demo.Models
 {
@@ -14,11 +15,7 @@ namespace Demo.Models
 
         public DbSet<Student> Students { get; set; }
         public DbSet<Department> Departments { get; set; }
+        public DbSet<ChatMessage> ChatMessages { get; set; }
 
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //{
-        //    optionsBuilder.UseSqlServer("Data Source=.;Initial Catalog=MvcDb;Integrated Security=True;Trust Server Certificate=True;");
-        //    base.OnConfiguring(optionsBuilder);
-        //}
     }
 }

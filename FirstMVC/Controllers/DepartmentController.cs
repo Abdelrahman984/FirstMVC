@@ -15,5 +15,20 @@ namespace FirstMVC.Controllers
             List<Department> departments = _context.Departments.ToList();
             return View("Index", departments);
         }
+        public IActionResult Add()
+        {
+            return View("Add");
+        }
+        [HttpPost]
+        public IActionResult SaveAdd(Department department)
+        {
+            if (department.Name != null)
+            {
+                _context.Departments.Add(department);
+                _context.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View("Add", department);
+        }
     }
 }

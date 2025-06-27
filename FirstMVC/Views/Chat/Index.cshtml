@@ -1,0 +1,45 @@
+﻿@{  
+    ViewData["Title"] = "Index";  
+}  
+
+<h1>Chat</h1>  
+
+<input type="text" id="messageInput" placeholder="Type your message here..." />  
+<input type="button" id="sendButton" value="Send" onclick="send()"/>  
+<br />  
+<div id="chatMessages" style="border: 1px solid black; height: 300px; overflow-y: scroll;">  
+	<ul id="messagesList" style="list-style-type: none; padding: 0;">  
+		
+	</ul>  
+</div>  
+
+@section Scripts {  
+	<script src="~/microsoft/signalr/dist/browser/signalr.js"></script>  
+
+	<script>  
+		// Prompt for name and store it in a variable  
+		let userName = prompt("Enter your name:");  
+
+		// Define Connection  
+		const con = new signalR.HubConnectionBuilder()  
+			.withUrl("/chat")  
+			.build();  
+
+		// Start connection  
+		con.start();  
+
+		// Define callback function  
+		con.on("NewMessage", function (msg) {  
+			$("#messagesList").append("<li><strong>" + msg.userName + ":</strong> " + msg.message + "</li>");  
+		});  
+
+		// Define function to consume server  
+		function send() {  
+			var obj={
+				"UserName": userName,
+				"Message": $("#messageInput").val()
+			}
+			con.invoke("SendMessage", obj);  
+		}  
+	</script>  
+}
